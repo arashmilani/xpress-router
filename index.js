@@ -55,7 +55,7 @@ function transformResourcesToRoutes(routes, resourceRoutesTemplate){
 function generateRoute(app, route, options){
   app[route.method](route.path, (req, res, next) => {
     var controolerFilePath = options.controllerDirectory + 
-      options.route.controller + options.controllerFileSuffix;
+      route.controller + options.controllerFileSuffix;
 
     var controller = require(controolerFilePath);
     controller[route.action](req, res, next);
