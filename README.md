@@ -1,7 +1,7 @@
 # xpress-router
 An opinionated router for express. 
 
-This router assumes that you are willing to route the request into controller.action() style. and by defult it assumes the controller files are located in `./controllers` directory and end in `-controller.js` file names. you can always change these options.
+This router assumes that you are willing to route the request into `controller.action()` style. and by defult it assumes the controller files are located in `./controllers` directory and end in `-controller.js` file names. you can always change these options.
 
 Also note that you can specify a `resource` name and the router will generate the CRUD routes for you.
 
@@ -37,7 +37,7 @@ a sample content for `./controllers/home-controller.js` file would be:
     function index(req, res, next){
       res.end('This is our homepage.');
     }
-
+    
     module.exports.index = index;
 
 the third parameter for the router is `options` and here is its default values. change them if you need to:
