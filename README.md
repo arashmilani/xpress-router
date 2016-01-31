@@ -25,7 +25,7 @@ This code will register these routes:
 
     GET / -> home.index
     GET /books -> books.index
-    GET /books/add -> books.add
+    GET /books/new -> books.add
     POST /books -> books.create
     GET /books/:id -> books.show
     GET /books/:id/edit -> books.edit
