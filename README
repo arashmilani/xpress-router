@@ -1,0 +1,40 @@
+# xpress-router
+An opinionated router for express. 
+
+This router assumes that you are willing to route the request into controller.action(). and by defult it assumes the controller files are located in `./controller` directory and end in `-controller.js` file names. you can always change these options.
+
+Also note that you can specify a `resource` name and the router will generate the CRUD routes for you. 
+
+install it via npm:
+
+    npm install express-router --save
+
+simply use it this way:
+
+    var express = require('express');
+    var router = require('xpress-router');
+
+    var app = express();
+    var routes = [
+      {method: 'get', path: '/', controller: 'home', action: 'index'},
+      {resource: '/books', controller: 'books'}
+    ]
+
+This code will register these routes:
+
+    GET / -> home.index
+    GET /books -> books.index
+    GET /books/add -> books.add
+    POST /books -> books.create
+    GET /books/:id -> books.show
+    GET /books/:id/edit -> books.edit
+    PUT /books/:id -> books.update
+    DELETE /books/:id -> books.delete
+
+a sample content for `./controllers/home-controller.js` file would be:
+
+    function index(req, res, next){
+      res.end('This is our homepage.');
+    }
+
+    module.exports.index = index;

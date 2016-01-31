@@ -32,7 +32,11 @@ module.exports = function(app, routes, options) {
 function transformResourcesToRoutes(routes, resourceRoutesTemplate){
   var output = [];
   routes.forEach((item, index) => {
-    if(!item.resource) return;
+    
+    if(!item.resource) {
+      output.push(item);
+      return;
+    }
 
     resourceRoutesTemplate.forEach((routeTemplate) => {
         var route = {
