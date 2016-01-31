@@ -9,7 +9,7 @@ module.exports = function(app, routes, options) {
     controllerFileSuffix: '-controller.js',
     resourceRoutesTemplate: [
       {method: 'get', pathSuffix: '', action: 'index'},
-      {method: 'get', pathSuffix: '/add', action: 'add'},
+      {method: 'get', pathSuffix: '/new', action: 'add'},
       {method: 'post', pathSuffix: '', action: 'create'},
       {method: 'get', pathSuffix: '/:id', action: 'show'},
       {method: 'get', pathSuffix: '/:id/edit', action: 'edit'},

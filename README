@@ -19,6 +19,7 @@ simply use it this way:
       {method: 'get', path: '/', controller: 'home', action: 'index'},
       {resource: '/books', controller: 'books'}
     ]
+    router(app, routes);
 
 This code will register these routes:
 
@@ -38,3 +39,19 @@ a sample content for `./controllers/home-controller.js` file would be:
     }
 
     module.exports.index = index;
+
+the third parameter for the router is `options` and here is its default values. change them if you need to:
+
+    {
+      controllerDirectory: process.cwd() + '/controllers/',
+      controllerFileSuffix: '-controller.js',
+      resourceRoutesTemplate: [
+        {method: 'get', pathSuffix: '', action: 'index'},
+        {method: 'get', pathSuffix: '/new', action: 'add'},
+        {method: 'post', pathSuffix: '', action: 'create'},
+        {method: 'get', pathSuffix: '/:id', action: 'show'},
+        {method: 'get', pathSuffix: '/:id/edit', action: 'edit'},
+        {method: 'put', pathSuffix: '/:id', action: 'update'},
+        {method: 'delete', pathSuffix: '/:id', action: 'delete'}
+      ]
+    }
