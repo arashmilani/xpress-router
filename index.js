@@ -17,7 +17,7 @@ module.exports = function(app, routes, options) {
       {method: 'delete', pathSuffix: '/:id', action: 'delete'}
     ]
   }
-  Object.assign({}, defaults, options);
+  options = Object.assign({}, defaults, options);
   routes = transformResourcesToRoutes(routes, options.resourceRoutesTemplate);
 
   if(debug) console.log('app routes list:');
@@ -57,7 +57,7 @@ function generateRoute(app, route, options){
     controller[route.action](req, res, next);
   });
 
-  if(config.env === 'development') {
+  if(debug) {
     console.log(`\t${route.method.toUpperCase()} ${route.path} ` + 
       `-> ${route.controller}.${route.action}`);
   }
