@@ -7,7 +7,7 @@ Also note that you can specify a `resource` name and the router will generate th
 
 install it via npm:
 
-    npm install express-router --save
+    npm install xpress-router --save
 
 simply use it this way:
 
