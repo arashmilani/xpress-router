@@ -14,7 +14,7 @@ module.exports = function(app, routes, options) {
       {method: 'get', pathSuffix: '/:id', action: 'show'},
       {method: 'get', pathSuffix: '/:id/edit', action: 'edit'},
       {method: 'put', pathSuffix: '/:id', action: 'update'},
-      {method: 'delete', pathSuffix: '/:id', action: 'delete'}
+      {method: 'delete', pathSuffix: '/:id', action: 'destroy'}
     ]
   }
   options = Object.assign({}, defaults, options);

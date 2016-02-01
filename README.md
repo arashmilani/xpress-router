@@ -30,7 +30,7 @@ This code will register these routes:
     GET /books/:id -> books.show
     GET /books/:id/edit -> books.edit
     PUT /books/:id -> books.update
-    DELETE /books/:id -> books.delete
+    DELETE /books/:id -> books.destroy
 
 a sample content for `./controllers/home-controller.js` file would be:
 
