@@ -55,3 +55,13 @@ the third parameter for the router is `options` and here is its default values. 
         {method: 'delete', pathSuffix: '/:id', action: 'delete'}
       ]
     }
+
+You can also specify any number of middleares for each routes:
+
+   var routes = [
+      {method: 'get', path: '/dashboard', controller: 'dashboard', action: 'index'
+        middlewares: [(req, res, next) => {
+            //check for user authentication before letting her in
+            next()
+        }]}
+    ]
