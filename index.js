@@ -1,10 +1,10 @@
-var debug = process.env.NODE_ENV === 'development' ? true : false;
+let debug = process.env.NODE_ENV === 'development' ? true : false
 
 module.exports = function(app, routes, options) {
-  if(!app) throw new Error('First argument of the router should be an express app');
-  var routes = routes || [];
-  var options = options || {};
-  var defaults = {
+  if(!app) throw new Error('First argument of the router should be an express app')
+  routes = routes || []
+  options = options || {}
+  let defaults = {
     controllerDirectory: process.cwd() + '/controllers/',
     controllerFileSuffix: '-controller.js',
     resourceRoutesTemplate: [
@@ -17,52 +17,51 @@ module.exports = function(app, routes, options) {
       {method: 'delete', pathSuffix: '/:id', action: 'destroy'}
     ]
   }
-  options = Object.assign({}, defaults, options);
-  routes = transformResourcesToRoutes(routes, options.resourceRoutesTemplate);
+  options = Object.assign({}, defaults, options)
+  routes = transformResourcesToRoutes(routes, options.resourceRoutesTemplate)
 
-  if(debug) console.log('app routes list:');
-  for(var r = 0; r < routes.length; r++){
-    route = routes[r];
-    generateRoute(app, route, options);
-  }
-
-  if(debug) console.log();
+  if(debug) console.log('app routes list:')
+  routes.forEach(route => generateRoute(app, route, options))
 }
 
 function transformResourcesToRoutes(routes, resourceRoutesTemplate){
-  var output = [];
+  let output = []
   routes.forEach((item, index) => {
-    
+
     if(!item.resource) {
-      output.push(item);
-      return;
+      output.push(item)
+      return
     }
 
     resourceRoutesTemplate.forEach((routeTemplate) => {
-        var route = {
+        let route = {
           method: routeTemplate.method, 
           path: item.resource + routeTemplate.pathSuffix, 
           controller: item.controller,
           action: routeTemplate.action
         }
-        output.push(route);
-    });
-  });
+        output.push(route)
+    })
+  })
 
-  return output;
+  return output
 }
 
 function generateRoute(app, route, options){
-  app[route.method](route.path, (req, res, next) => {
-    var controolerFilePath = options.controllerDirectory + 
-      route.controller + options.controllerFileSuffix;
+  let middlewares = route.middlewares || []
+  let args = [route.path, ...middlewares, callback]
+  app[route.method].apply(app, args)
 
-    var controller = require(controolerFilePath);
-    controller[route.action](req, res, next);
-  });
+  function callback(req, res, next){
+    let controolerFilePath = options.controllerDirectory + 
+            route.controller + options.controllerFileSuffix
+
+    let controller = require(controolerFilePath)
+    controller[route.action](req, res, next)
+  }
 
   if(debug) {
     console.log(`\t${route.method.toUpperCase()} ${route.path} ` + 
-      `-> ${route.controller}.${route.action}`);
+      `-> ${route.controller}.${route.action}`)
   }
 }
