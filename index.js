@@ -20,7 +20,7 @@ module.exports = function (app, routes, options) {
   options = Object.assign({}, defaults, options)
   routes = transformResourcesToRoutes(routes, options.resourceRoutesTemplate)
 
-  if (debug) console.log('app routes list:')
+  if (debug && (options.logRoutesList === false ?  false: true)) console.log('app routes list:')
   routes.forEach(route => generateRoute(app, route, options))
 }
 
@@ -60,7 +60,7 @@ function generateRoute(app, route, options) {
     controller[route.action](req, res, next)
   }
 
-  if (debug) {
+  if (debug && (options.logRoutesList === false ? false : true)) {
     console.log(`\t${route.method.toUpperCase()} ${route.path} ` +
       `-> ${route.controller}.${route.action}`)
   }
