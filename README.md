@@ -54,9 +54,10 @@ the third parameter for the router is `options` and here is its default values. 
         {method: 'put', pathSuffix: '/:id', action: 'update'},
         {method: 'delete', pathSuffix: '/:id', action: 'delete'}
       ]
+      logRoutesList: true // in development mode
     }
 
-You can also specify any number of middleares for each routes:
+You can also specify any number of middlewares for each routes:
 ````
 var routes = [
   {method: 'get', path: '/dashboard', controller: 'dashboard', action: 'index'
