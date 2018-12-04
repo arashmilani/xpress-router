@@ -20,7 +20,7 @@ module.exports = function (app, routes, options) {
   options = Object.assign({}, defaults, options)
   routes = transformResourcesToRoutes(routes, options.resourceRoutesTemplate)
 
-  if (debug && (options.logRoutesList === false ?  false: true)) console.log('app routes list:')
+  if (debug && (options.logRoutesList === false ? false : true)) console.log('app routes list:')
   routes.forEach(route => generateRoute(app, route, options))
 }
 
@@ -48,15 +48,16 @@ function transformResourcesToRoutes(routes, resourceRoutesTemplate) {
 }
 
 function generateRoute(app, route, options) {
-  let middlewares = route.middlewares || []
-  let args = [route.path, ...middlewares, callback]
+  const middlewares = route.middlewares || []
+  const args = [route.path, ...middlewares, callback]
   app[route.method].apply(app, args)
 
-  function callback(req, res, next) {
-    let controllerFilePath = options.controllerDirectory +
-      route.controller + options.controllerFileSuffix
+  const controllerFilePath = options.controllerDirectory +
+    route.controller + options.controllerFileSuffix
 
-    let controller = require(controllerFilePath)
+  const controller = require(controllerFilePath)
+
+  function callback(req, res, next) {
     controller[route.action](req, res, next)
   }
 
